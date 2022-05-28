@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Modèles </label>
+        <select class="form-control form-control-lg" id="idMod" name="idMod" [(ngModel)]="IdModele"
+            (change)="onChange()">
+            <option *ngFor="let mod of modeles" value="{{mod.idMod}}">
+                {{mod.nomMod}}
+            </option>
+        </select>
+    </div>
+
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table">
+                <caption>Liste de Voitures</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Date de Création</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Modèle</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let v of voitures"> 
+                  <tr>
+                    <td>{{v.idVoiture}}</td>
+                    <td>{{v.typeVoiture}}</td>
+                    <td>{{v.prixVoiture}}</td>
+                    <td>{{v.dateCreation | date :'dd/MM/yyyy'}}</td>
+                    <td>{{v.marque.nomMar}}</td>
+                    <td>{{v.modele.nomMod}}</td>
+                    <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerVoiture(v)">Supprimer</a></td>
+                    <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateVoiture',v.idVoiture]">Modifier</a></td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
